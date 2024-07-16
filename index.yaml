@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  test-chart:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-16T15:32:09.44803452Z"
+    description: A Helm chart for Kubernetes
+    digest: 89ec02a0351571cebe917a7f2c9abe571f46e7510e872b99f470a2575a7d4d09
+    name: test-chart
+    type: application
+    urls:
+    - https://github.com/abosii-harness/helm-repo/releases/download/test-chart-0.1.0/test-chart-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-07-16T15:32:09.448047555Z"
