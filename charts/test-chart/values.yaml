@@ -68,6 +68,9 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+vault:
+  dv: <<path:secret/test/dv>
+
 autoscaling:
   enabled: false
   minReplicas: 1
