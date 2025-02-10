@@ -69,7 +69,7 @@ resources: {}
   #   memory: 128Mi
 
 vault:
-  dv: <path:secrets/test/dv>
+  dv: <path:secret/data/test#dv>
 
 autoscaling:
   enabled: false
