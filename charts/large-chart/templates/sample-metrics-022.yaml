@@ -1,0 +1,13 @@
+{{- if and .Values.modules.metrics .Values.modules.metrics.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-metrics-022
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: metrics
+data:
+  module: "metrics"
+  sampleId: "22"
+  description: "Sample configmap for metrics module - template 22"
+{{- end }}

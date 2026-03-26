@@ -1,0 +1,13 @@
+{{- if and .Values.modules.storage .Values.modules.storage.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-storage-016
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: storage
+data:
+  module: "storage"
+  sampleId: "16"
+  description: "Sample configmap for storage module - template 16"
+{{- end }}

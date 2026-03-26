@@ -1,0 +1,13 @@
+{{- if and .Values.modules.auth .Values.modules.auth.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-auth-004
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: auth
+data:
+  module: "auth"
+  sampleId: "4"
+  description: "Sample configmap for auth module - template 4"
+{{- end }}

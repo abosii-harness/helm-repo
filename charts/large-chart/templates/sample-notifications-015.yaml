@@ -1,0 +1,13 @@
+{{- if and .Values.modules.notifications .Values.modules.notifications.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-notifications-015
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: notifications
+data:
+  module: "notifications"
+  sampleId: "15"
+  description: "Sample configmap for notifications module - template 15"
+{{- end }}

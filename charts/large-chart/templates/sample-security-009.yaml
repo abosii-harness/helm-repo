@@ -1,0 +1,13 @@
+{{- if and .Values.modules.security .Values.modules.security.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-security-009
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: security
+data:
+  module: "security"
+  sampleId: "9"
+  description: "Sample configmap for security module - template 9"
+{{- end }}

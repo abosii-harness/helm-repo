@@ -1,0 +1,13 @@
+{{- if and .Values.modules.logging .Values.modules.logging.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-logging-031
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: logging
+data:
+  module: "logging"
+  sampleId: "31"
+  description: "Sample configmap for logging module - template 31"
+{{- end }}

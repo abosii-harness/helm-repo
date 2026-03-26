@@ -1,0 +1,43 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: "1.25"
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+## Feature flags - all disabled by default so sample templates produce no resources
+modules:
+  logging:
+    enabled: false
+  metrics:
+    enabled: false
+  caching:
+    enabled: false
+  auth:
+    enabled: false
+  notifications:
+    enabled: false
+  storage:
+    enabled: false
+  networking:
+    enabled: false
+  scheduling:
+    enabled: false
+  security:
+    enabled: false
+  monitoring:
+    enabled: false
+
+config:
+  appName: "large-chart-app"
+  environment: "dev"
+  logLevel: "info"
+  maxRetries: 3
+  timeoutSeconds: 30
