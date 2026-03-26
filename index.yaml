@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  large-chart:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2026-03-26T14:30:04.835692093Z"
+    description: A Helm chart with 100+ template files for testing purposes
+    digest: b7c855c5e0ef3544cd5d560d080dddc9c08aa99cd8e979640d6277912ff763f2
+    name: large-chart
+    type: application
+    urls:
+    - https://github.com/abosii-harness/helm-repo/releases/download/large-chart-0.1.0/large-chart-0.1.0.tgz
+    version: 0.1.0
   test-chart:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -21,4 +32,4 @@ entries:
     urls:
     - https://github.com/abosii-harness/helm-repo/releases/download/test-chart-0.1.0/test-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-16T15:53:23.178836541Z"
+generated: "2026-03-26T14:30:04.83570673Z"
