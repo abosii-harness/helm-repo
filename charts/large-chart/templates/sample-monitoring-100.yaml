@@ -1,0 +1,13 @@
+{{- if and .Values.modules.monitoring .Values.modules.monitoring.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-monitoring-100
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: monitoring
+data:
+  module: "monitoring"
+  sampleId: "100"
+  description: "Sample configmap for monitoring module - template 100"
+{{- end }}

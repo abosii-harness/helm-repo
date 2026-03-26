@@ -1,0 +1,13 @@
+{{- if and .Values.modules.networking .Values.modules.networking.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-networking-107
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: networking
+data:
+  module: "networking"
+  sampleId: "107"
+  description: "Sample configmap for networking module - template 107"
+{{- end }}

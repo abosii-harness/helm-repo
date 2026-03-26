@@ -1,0 +1,13 @@
+{{- if and .Values.modules.scheduling .Values.modules.scheduling.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-scheduling-088
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: scheduling
+data:
+  module: "scheduling"
+  sampleId: "88"
+  description: "Sample configmap for scheduling module - template 88"
+{{- end }}

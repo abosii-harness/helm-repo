@@ -1,0 +1,13 @@
+{{- if and .Values.modules.caching .Values.modules.caching.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-caching-083
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: caching
+data:
+  module: "caching"
+  sampleId: "83"
+  description: "Sample configmap for caching module - template 83"
+{{- end }}
