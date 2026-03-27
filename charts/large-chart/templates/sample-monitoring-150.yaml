@@ -1,0 +1,73 @@
+{{/*
+  Template: monitoring-150
+  Module: monitoring
+  Description: Extended configuration template for the monitoring module.
+  This template provides comprehensive configuration options for the
+  monitoring subsystem including resource limits, environment variables,
+  annotations, volume mounts, and additional metadata.
+  
+  Usage:
+    Enable this template by setting:
+      modules.monitoring.enabled: true
+    in your values.yaml file.
+
+  Parameters:
+    - module: The name of the module (monitoring)
+    - sampleId: Unique identifier for this template (150)
+    - component: Kubernetes component label
+    - tier: Application tier classification
+    - version: Configuration schema version
+*/}}
+{{- if and .Values.modules.monitoring .Values.modules.monitoring.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-monitoring-150
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/part-of: large-chart
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "large-chart.chart" . }}
+  annotations:
+    meta.helm.sh/release-name: {{ .Release.Name }}
+    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+    configmap.kubernetes.io/description: "Extended config for monitoring module - template 150"
+data:
+  module: "monitoring"
+  sampleId: "150"
+  description: "Sample configmap for monitoring module - template 150"
+  config.yaml: |
+    module:
+      name: monitoring
+      id: 150
+      version: "1.0.0"
+      tier: "standard"
+    settings:
+      logLevel: "info"
+      retryCount: 3
+      timeoutSeconds: 30
+      bufferSize: 1024
+      maxConnections: 100
+      keepAliveInterval: 60
+      flushIntervalMs: 5000
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    metadata:
+      createdBy: "helm-chart"
+      templateVersion: "v2"
+      region: "default"
+      environment: "production"
+      category: "monitoring"
+      subcategory: "config-150"
+      tags:
+        - "monitoring"
+        - "auto-generated"
+        - "template-150"
+        - "large-chart"
+{{- end }}

@@ -1,0 +1,73 @@
+{{/*
+  Template: caching-113
+  Module: caching
+  Description: Extended configuration template for the caching module.
+  This template provides comprehensive configuration options for the
+  caching subsystem including resource limits, environment variables,
+  annotations, volume mounts, and additional metadata.
+  
+  Usage:
+    Enable this template by setting:
+      modules.caching.enabled: true
+    in your values.yaml file.
+
+  Parameters:
+    - module: The name of the module (caching)
+    - sampleId: Unique identifier for this template (113)
+    - component: Kubernetes component label
+    - tier: Application tier classification
+    - version: Configuration schema version
+*/}}
+{{- if and .Values.modules.caching .Values.modules.caching.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-caching-113
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: caching
+    app.kubernetes.io/part-of: large-chart
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "large-chart.chart" . }}
+  annotations:
+    meta.helm.sh/release-name: {{ .Release.Name }}
+    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+    configmap.kubernetes.io/description: "Extended config for caching module - template 113"
+data:
+  module: "caching"
+  sampleId: "113"
+  description: "Sample configmap for caching module - template 113"
+  config.yaml: |
+    module:
+      name: caching
+      id: 113
+      version: "1.0.0"
+      tier: "standard"
+    settings:
+      logLevel: "info"
+      retryCount: 3
+      timeoutSeconds: 30
+      bufferSize: 1024
+      maxConnections: 100
+      keepAliveInterval: 60
+      flushIntervalMs: 5000
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    metadata:
+      createdBy: "helm-chart"
+      templateVersion: "v2"
+      region: "default"
+      environment: "production"
+      category: "caching"
+      subcategory: "config-113"
+      tags:
+        - "caching"
+        - "auto-generated"
+        - "template-113"
+        - "large-chart"
+{{- end }}

@@ -1,0 +1,73 @@
+{{/*
+  Template: scheduling-138
+  Module: scheduling
+  Description: Extended configuration template for the scheduling module.
+  This template provides comprehensive configuration options for the
+  scheduling subsystem including resource limits, environment variables,
+  annotations, volume mounts, and additional metadata.
+  
+  Usage:
+    Enable this template by setting:
+      modules.scheduling.enabled: true
+    in your values.yaml file.
+
+  Parameters:
+    - module: The name of the module (scheduling)
+    - sampleId: Unique identifier for this template (138)
+    - component: Kubernetes component label
+    - tier: Application tier classification
+    - version: Configuration schema version
+*/}}
+{{- if and .Values.modules.scheduling .Values.modules.scheduling.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-scheduling-138
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: scheduling
+    app.kubernetes.io/part-of: large-chart
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "large-chart.chart" . }}
+  annotations:
+    meta.helm.sh/release-name: {{ .Release.Name }}
+    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+    configmap.kubernetes.io/description: "Extended config for scheduling module - template 138"
+data:
+  module: "scheduling"
+  sampleId: "138"
+  description: "Sample configmap for scheduling module - template 138"
+  config.yaml: |
+    module:
+      name: scheduling
+      id: 138
+      version: "1.0.0"
+      tier: "standard"
+    settings:
+      logLevel: "info"
+      retryCount: 3
+      timeoutSeconds: 30
+      bufferSize: 1024
+      maxConnections: 100
+      keepAliveInterval: 60
+      flushIntervalMs: 5000
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    metadata:
+      createdBy: "helm-chart"
+      templateVersion: "v2"
+      region: "default"
+      environment: "production"
+      category: "scheduling"
+      subcategory: "config-138"
+      tags:
+        - "scheduling"
+        - "auto-generated"
+        - "template-138"
+        - "large-chart"
+{{- end }}

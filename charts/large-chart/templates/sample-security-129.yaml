@@ -1,0 +1,73 @@
+{{/*
+  Template: security-129
+  Module: security
+  Description: Extended configuration template for the security module.
+  This template provides comprehensive configuration options for the
+  security subsystem including resource limits, environment variables,
+  annotations, volume mounts, and additional metadata.
+  
+  Usage:
+    Enable this template by setting:
+      modules.security.enabled: true
+    in your values.yaml file.
+
+  Parameters:
+    - module: The name of the module (security)
+    - sampleId: Unique identifier for this template (129)
+    - component: Kubernetes component label
+    - tier: Application tier classification
+    - version: Configuration schema version
+*/}}
+{{- if and .Values.modules.security .Values.modules.security.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-security-129
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: security
+    app.kubernetes.io/part-of: large-chart
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "large-chart.chart" . }}
+  annotations:
+    meta.helm.sh/release-name: {{ .Release.Name }}
+    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+    configmap.kubernetes.io/description: "Extended config for security module - template 129"
+data:
+  module: "security"
+  sampleId: "129"
+  description: "Sample configmap for security module - template 129"
+  config.yaml: |
+    module:
+      name: security
+      id: 129
+      version: "1.0.0"
+      tier: "standard"
+    settings:
+      logLevel: "info"
+      retryCount: 3
+      timeoutSeconds: 30
+      bufferSize: 1024
+      maxConnections: 100
+      keepAliveInterval: 60
+      flushIntervalMs: 5000
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    metadata:
+      createdBy: "helm-chart"
+      templateVersion: "v2"
+      region: "default"
+      environment: "production"
+      category: "security"
+      subcategory: "config-129"
+      tags:
+        - "security"
+        - "auto-generated"
+        - "template-129"
+        - "large-chart"
+{{- end }}

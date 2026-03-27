@@ -1,0 +1,73 @@
+{{/*
+  Template: metrics-122
+  Module: metrics
+  Description: Extended configuration template for the metrics module.
+  This template provides comprehensive configuration options for the
+  metrics subsystem including resource limits, environment variables,
+  annotations, volume mounts, and additional metadata.
+  
+  Usage:
+    Enable this template by setting:
+      modules.metrics.enabled: true
+    in your values.yaml file.
+
+  Parameters:
+    - module: The name of the module (metrics)
+    - sampleId: Unique identifier for this template (122)
+    - component: Kubernetes component label
+    - tier: Application tier classification
+    - version: Configuration schema version
+*/}}
+{{- if and .Values.modules.metrics .Values.modules.metrics.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-metrics-122
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: metrics
+    app.kubernetes.io/part-of: large-chart
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "large-chart.chart" . }}
+  annotations:
+    meta.helm.sh/release-name: {{ .Release.Name }}
+    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+    configmap.kubernetes.io/description: "Extended config for metrics module - template 122"
+data:
+  module: "metrics"
+  sampleId: "122"
+  description: "Sample configmap for metrics module - template 122"
+  config.yaml: |
+    module:
+      name: metrics
+      id: 122
+      version: "1.0.0"
+      tier: "standard"
+    settings:
+      logLevel: "info"
+      retryCount: 3
+      timeoutSeconds: 30
+      bufferSize: 1024
+      maxConnections: 100
+      keepAliveInterval: 60
+      flushIntervalMs: 5000
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    metadata:
+      createdBy: "helm-chart"
+      templateVersion: "v2"
+      region: "default"
+      environment: "production"
+      category: "metrics"
+      subcategory: "config-122"
+      tags:
+        - "metrics"
+        - "auto-generated"
+        - "template-122"
+        - "large-chart"
+{{- end }}

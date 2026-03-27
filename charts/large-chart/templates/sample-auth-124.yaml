@@ -1,0 +1,73 @@
+{{/*
+  Template: auth-124
+  Module: auth
+  Description: Extended configuration template for the auth module.
+  This template provides comprehensive configuration options for the
+  auth subsystem including resource limits, environment variables,
+  annotations, volume mounts, and additional metadata.
+  
+  Usage:
+    Enable this template by setting:
+      modules.auth.enabled: true
+    in your values.yaml file.
+
+  Parameters:
+    - module: The name of the module (auth)
+    - sampleId: Unique identifier for this template (124)
+    - component: Kubernetes component label
+    - tier: Application tier classification
+    - version: Configuration schema version
+*/}}
+{{- if and .Values.modules.auth .Values.modules.auth.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-auth-124
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: auth
+    app.kubernetes.io/part-of: large-chart
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "large-chart.chart" . }}
+  annotations:
+    meta.helm.sh/release-name: {{ .Release.Name }}
+    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+    configmap.kubernetes.io/description: "Extended config for auth module - template 124"
+data:
+  module: "auth"
+  sampleId: "124"
+  description: "Sample configmap for auth module - template 124"
+  config.yaml: |
+    module:
+      name: auth
+      id: 124
+      version: "1.0.0"
+      tier: "standard"
+    settings:
+      logLevel: "info"
+      retryCount: 3
+      timeoutSeconds: 30
+      bufferSize: 1024
+      maxConnections: 100
+      keepAliveInterval: 60
+      flushIntervalMs: 5000
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    metadata:
+      createdBy: "helm-chart"
+      templateVersion: "v2"
+      region: "default"
+      environment: "production"
+      category: "auth"
+      subcategory: "config-124"
+      tags:
+        - "auth"
+        - "auto-generated"
+        - "template-124"
+        - "large-chart"
+{{- end }}

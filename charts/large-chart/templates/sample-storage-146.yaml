@@ -1,0 +1,73 @@
+{{/*
+  Template: storage-146
+  Module: storage
+  Description: Extended configuration template for the storage module.
+  This template provides comprehensive configuration options for the
+  storage subsystem including resource limits, environment variables,
+  annotations, volume mounts, and additional metadata.
+  
+  Usage:
+    Enable this template by setting:
+      modules.storage.enabled: true
+    in your values.yaml file.
+
+  Parameters:
+    - module: The name of the module (storage)
+    - sampleId: Unique identifier for this template (146)
+    - component: Kubernetes component label
+    - tier: Application tier classification
+    - version: Configuration schema version
+*/}}
+{{- if and .Values.modules.storage .Values.modules.storage.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-storage-146
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/part-of: large-chart
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "large-chart.chart" . }}
+  annotations:
+    meta.helm.sh/release-name: {{ .Release.Name }}
+    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+    configmap.kubernetes.io/description: "Extended config for storage module - template 146"
+data:
+  module: "storage"
+  sampleId: "146"
+  description: "Sample configmap for storage module - template 146"
+  config.yaml: |
+    module:
+      name: storage
+      id: 146
+      version: "1.0.0"
+      tier: "standard"
+    settings:
+      logLevel: "info"
+      retryCount: 3
+      timeoutSeconds: 30
+      bufferSize: 1024
+      maxConnections: 100
+      keepAliveInterval: 60
+      flushIntervalMs: 5000
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    metadata:
+      createdBy: "helm-chart"
+      templateVersion: "v2"
+      region: "default"
+      environment: "production"
+      category: "storage"
+      subcategory: "config-146"
+      tags:
+        - "storage"
+        - "auto-generated"
+        - "template-146"
+        - "large-chart"
+{{- end }}

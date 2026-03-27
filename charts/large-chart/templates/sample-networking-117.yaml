@@ -1,0 +1,73 @@
+{{/*
+  Template: networking-117
+  Module: networking
+  Description: Extended configuration template for the networking module.
+  This template provides comprehensive configuration options for the
+  networking subsystem including resource limits, environment variables,
+  annotations, volume mounts, and additional metadata.
+  
+  Usage:
+    Enable this template by setting:
+      modules.networking.enabled: true
+    in your values.yaml file.
+
+  Parameters:
+    - module: The name of the module (networking)
+    - sampleId: Unique identifier for this template (117)
+    - component: Kubernetes component label
+    - tier: Application tier classification
+    - version: Configuration schema version
+*/}}
+{{- if and .Values.modules.networking .Values.modules.networking.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "large-chart.fullname" . }}-networking-117
+  labels:
+    {{- include "large-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: networking
+    app.kubernetes.io/part-of: large-chart
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "large-chart.chart" . }}
+  annotations:
+    meta.helm.sh/release-name: {{ .Release.Name }}
+    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+    configmap.kubernetes.io/description: "Extended config for networking module - template 117"
+data:
+  module: "networking"
+  sampleId: "117"
+  description: "Sample configmap for networking module - template 117"
+  config.yaml: |
+    module:
+      name: networking
+      id: 117
+      version: "1.0.0"
+      tier: "standard"
+    settings:
+      logLevel: "info"
+      retryCount: 3
+      timeoutSeconds: 30
+      bufferSize: 1024
+      maxConnections: 100
+      keepAliveInterval: 60
+      flushIntervalMs: 5000
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    metadata:
+      createdBy: "helm-chart"
+      templateVersion: "v2"
+      region: "default"
+      environment: "production"
+      category: "networking"
+      subcategory: "config-117"
+      tags:
+        - "networking"
+        - "auto-generated"
+        - "template-117"
+        - "large-chart"
+{{- end }}
